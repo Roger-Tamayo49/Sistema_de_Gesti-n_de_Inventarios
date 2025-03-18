@@ -1,0 +1,73 @@
+abstract class Producto {
+    protected String nombre;
+    protected double precio;
+    protected int stock;
+
+    public Producto(String nombre, double precio, int stock) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+    }
+
+    public abstract void mostrarDetalles();
+
+    public void actualizarStock(int cantidad) {
+        this.stock += cantidad;
+    }
+}
+
+class Electronico extends Producto {
+    private String marca;
+
+    public Electronico(String nombre, double precio, int stock, String marca) {
+        super(nombre, precio, stock);
+        this.marca = marca;
+    }
+
+    @Override
+    public void mostrarDetalles() {
+        System.out.println("Electrónico: " + nombre + ", Marca: " + marca + ", Precio: " + precio + ", Stock: " + stock);
+    }
+}
+
+class Alimento extends Producto {
+    private String fechaExpiracion;
+
+    public Alimento(String nombre, double precio, int stock, String fechaExpiracion) {
+        super(nombre, precio, stock);
+        this.fechaExpiracion = fechaExpiracion;
+    }
+
+    @Override
+    public void mostrarDetalles() {
+        System.out.println("Alimento: " + nombre + ", Expira: " + fechaExpiracion + ", Precio: " + precio + ", Stock: " + stock);
+    }
+}
+
+class Ropa extends Producto {
+    private String talla;
+
+    public Ropa(String nombre, double precio, int stock, String talla) {
+        super(nombre, precio, stock);
+        this.talla = talla;
+    }
+
+    @Override
+    public void mostrarDetalles() {
+        System.out.println("Ropa: " + nombre + ", Talla: " + talla + ", Precio: " + precio + ", Stock: " + stock);
+    }
+}
+
+public class InventarioTest {
+    public static void main(String[] args) {
+        Producto laptop = new Electronico("Laptop", 1500, 10, "Dell");
+        Producto manzana = new Alimento("Manzana", 1.5, 50, "2025-12-01");
+        Producto camiseta = new Ropa("Camiseta", 20, 100, "M");
+
+        Producto[] inventario = {laptop, manzana, camiseta};
+
+        for (Producto p : inventario) {
+            p.mostrarDetalles();
+        }
+    }
+}
